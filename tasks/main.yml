@@ -1,0 +1,23 @@
+---
+# tasks file for ansible-git
+
+- name: Install Git | Linux
+  apt:
+    name: "{{ items }}"
+    state: latest
+    update_cache: yes
+    cache_valid_time: 86400
+  with_items:
+    - "{{ git_apt_apps }}"
+  become: true
+
+- name: Clone git repos
+  git:
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}"
+    update: yes
+    accept_hostkey: yes
+    recursive: yes
+  with_items:
+    - "{{ git_cloning }}"
+  register: standard_git_cloned

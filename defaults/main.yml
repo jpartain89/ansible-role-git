@@ -1,0 +1,21 @@
+---
+# defaults file for ansible-git
+
+git_apt_apps:
+  - git
+  - git-core
+  - git-man
+
+git_loc: "{{ ansible_user_dir }}/git"
+
+git_github_address:
+  - ssh: git@github.com
+  - url: https://github.com
+
+#git_cloning:
+#  - { repo: "{{ git_github_address.ssh }}:jpartain89/conffiles.git", dest: "{{ git_loc }}/conffiles" }
+#  - { repo: "{{ git_github_address.ssh }}/generalscripts.git", dest: "{{ git_loc }}/generalscripts" }
+#  - { repo: "{{ git_github_address.ssh }}/myfunctions.git", dest: "{{ git_loc }}/myfunctions" }
+#  - { repo: "{{ git_github_address.ssh }}/git-automap.git", dest: "{{ git_loc }}/git-automap" }
+#  - { repo: "https://github.com/scopatz/nanorc.git", dest: "{{ git_loc }}/nanorc" }
+#  - { repo: "https://github.com/AGWA/git-crypt", dest: "{{ git_loc }}/git-crypt" }

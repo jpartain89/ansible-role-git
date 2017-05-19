@@ -16,6 +16,7 @@ galaxy_info:
     versions:
     - stretch
     - wheezy
+    - jessie
   - name: MacOSX
     versions:
     - '10.12'

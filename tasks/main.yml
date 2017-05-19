@@ -10,6 +10,26 @@
   with_items:
     - "{{ git_apt_apps }}"
   become: true
+  when: ansible_os_family == "Debian"
+  
+- name: Install Git | macOS
+  homebrew:
+    install_options: "{{ item }}"
+    state: present
+    name: git
+  with_items:
+    - "{{ brew_git_options }}"
+  when: ansible_os_family == "Darwin"
+
+- name: Confirm the Git Directory Exists
+  file:
+    path: "{{ item.path }}"
+    state: directory
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+  with_items:
+    - "{{ git_dir }}"
 
 - name: Clone git repos
   git:

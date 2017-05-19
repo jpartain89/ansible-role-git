@@ -5,12 +5,6 @@ brew_git_options:
   - "--with-curl"
   - "--with-persistent-https"
 
-git_dir:
-  path: "{{ ansible_user_dir }}/git"
-  owner: "{{ ansible_effective_user_id }}"
-  group: "{{ ansible_effective_group_id }}"
-  mode: 0775
-
 git_address:
   ssh: "git@github.com:"
   url: "https://github.com/"

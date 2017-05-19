@@ -1,5 +1,11 @@
 ---
 
+- include_vars: 'vars/darwin.yml'
+  when: ansible_os_family == 'Darwin'
+  
+- include_vars: 'vars/debian.yml'
+  when: ansible_os_family == 'Debian'
+
 - name: Install Git | Linux
   apt:
     name: "{{ item }}"

@@ -8,5 +8,5 @@ git_apt_apps:
 git_dir:
   path: "{{ ansible_user_dir }}/git"
   owner: "{{ ansible_user_id }}"
-  group: root
+  group: "{{ ansible_user_id }}"
   mode: '0775'

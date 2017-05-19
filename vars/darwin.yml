@@ -3,5 +3,5 @@
 git_dir:
   path: "{{ ansible_user_dir }}/git"
   owner: "{{ ansible_user_id }}"
-  group: wheel
+  group: staff
   mode: '0775'

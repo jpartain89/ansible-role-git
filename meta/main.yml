@@ -17,9 +17,6 @@ galaxy_info:
     - stretch
     - wheezy
     - jessie
-  - name: MacOSX
-    versions:
-    - '10.12'
   
   galaxy_tags: []
 dependencies: []

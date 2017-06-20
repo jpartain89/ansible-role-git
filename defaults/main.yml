@@ -1,9 +1,20 @@
 ---
 # defaults file for ansible-git
 
+git_dir:
+  path: "{{ ansible_user_dir }}/git"
+  owner: "{{ ansible_user_id }}"
+  group: "{{ ansible_user_id }}"
+  mode: '0775'
+
 brew_git_options:
   - "--with-curl"
   - "--with-persistent-https"
+
+git_apt_apps:
+  - git
+  - git-core
+  - git-man
 
 git_address:
   ssh: "git@github.com:"

@@ -1,4 +1,4 @@
-Ansible-Git
+Ansible-Git  [![Build Status](https://travis-ci.org/jpartain89/ansible-role-git.svg?branch=master)](https://travis-ci.org/jpartain89/ansible-role-git)
 =========
 
 This installs git through Apt and then clones the repos of your choice.
@@ -11,7 +11,7 @@ The dictionary `git_dir`:
     - `owner`: Currently set to the UID of the person you run ansible as
     - `group`: Currently set to the UID of the person you run ansible as
     - `mode`: Currently set to 0775 for the Directories
-    
+
 `git_cloning`: There are two specific fields needed, `repo` and `dest`, that go on the same line.
     - `repo`: The address of the git repo you want to clone from
     - `dest`: The destination you want the local clone to be at

@@ -38,4 +38,5 @@
     recursive: yes
   with_items:
     - "{{ git_cloning }}"
-  register: standard_git_cloned
+  register: _standard_git_cloned
+  failed_when: false

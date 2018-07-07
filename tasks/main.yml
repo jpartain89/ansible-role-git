@@ -24,10 +24,9 @@
   file:
     path: "{{ item.path }}"
     state: directory
-    owner: "{{ item.owner }}"
-    group: "{{ item.group }}"
   with_items:
     - "{{ git_dir }}"
+  become_user: "{{ ansible_user }}"
 
 - name: Clone git repos
   git:
@@ -40,3 +39,4 @@
     - "{{ git_cloning }}"
   register: _standard_git_cloned
   failed_when: false
+  become_user: "{{ ansible_user }}"

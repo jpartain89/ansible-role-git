@@ -3,8 +3,8 @@
 
 git_dir:
   path: "{{ ansible_user_dir }}/git"
-  owner: "{{ ansible_user_id }}"
-  group: "{{ ansible_user_id }}"
+  owner: "{{ ansible_user_uid }}"
+  group: "{{ ansible_user_gid }}"
   mode: '0775'
 
 brew_git_options:

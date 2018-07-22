@@ -22,7 +22,7 @@
     state: directory
   with_items:
     - "{{ git_dir }}"
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ ansible_user_id }}"
 
 - name: Clone git repos
   git:
@@ -35,4 +35,4 @@
     - "{{ git_cloning }}"
   register: _standard_git_cloned
   failed_when: false
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ ansible_user_id }}"

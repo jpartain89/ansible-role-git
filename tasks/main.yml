@@ -2,22 +2,18 @@
 
 - name: Install Git | Linux
   apt:
-    name: "{{ item }}"
+    name: "{{ git_apt_apps }}"
     state: latest
     update_cache: yes
     cache_valid_time: 86400
-  with_items:
-    - "{{ git_apt_apps }}"
   become: true
   when: ansible_os_family == "Debian"
 
 - name: Install Git | macOS
   homebrew:
-    install_options: "{{ item }}"
+    install_options: "{{ brew_git_options }}"
     state: present
     name: git
-  with_items:
-    - "{{ brew_git_options }}"
   when: ansible_os_family == "Darwin"
 
 - name: Confirm the Git Directory Exists

@@ -33,6 +33,7 @@
     recursive: yes
   with_items:
     - "{{ git_cloning }}"
+    - "{{ git_device_cloning }}"
   register: _standard_git_cloned
   failed_when: false
   become_user: "{{ ansible_user_id }}"

@@ -23,6 +23,7 @@ git_address:
 git_cloning:
   - { repo: "{{ git_address.url }}jpartain89/conffiles.git", dest: "{{ git_dir.path }}/conffiles" }
   - { repo: "{{ git_address.url }}jpartain89/generalscripts.git", dest: "{{ git_dir.path }}/generalscripts" }
-  - { repo: "{{ git_address.url }}jpartain89/myfunctions.git", dest: "{{ git_dir.path }}/myfunctions" }
   - { repo: "{{ git_address.url }}jpartain89/git-automap.git", dest: "{{ git_dir.path }}/git-automap" }
+
+git_device_cloning:
   - { repo: "{{ git_address.url }}scopatz/nanorc.git", dest: "{{ git_dir.path }}/nanorc" }

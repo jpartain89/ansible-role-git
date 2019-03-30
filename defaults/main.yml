@@ -16,6 +16,11 @@ git_apt_apps:
   - git-core
   - git-man
 
+git_dnf_apps:
+  - git
+  - git-core
+  - git-lfs
+
 git_address:
   ssh: "git@github.com:"
   url: "https://github.com/"

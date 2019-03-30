@@ -16,6 +16,14 @@
     name: git
   when: ansible_os_family == "Darwin"
 
+- name: Install Git | Fedora
+  dnf:
+    name: "{{ git_dnf_apps }}"
+    state: latest
+    update_cache: yes
+  when: ansible_os_family == "RedHat"
+  become: true
+
 - name: Confirm the Git Directory Exists
   file:
     path: "{{ item.path }}"

@@ -18,13 +18,17 @@ git_dnf_apps:
   - git-lfs
 
 git_address:
-  ssh: "git@github.com:"
-  url: "https://github.com/"
+  github_ssh: "git@github.com:"
+  github_url: "https://github.com/"
+  gitlab_ssh: "git@gitlab.com:"
+  gitlab_url: "https://gitlab.com/"
 
+# Use this variable for your group_vars
 git_cloning:
-  - { repo: "{{ git_address.url }}jpartain89/conffiles.git", dest: "{{ git_dir.path }}/conffiles" }
-  - { repo: "{{ git_address.url }}jpartain89/generalscripts.git", dest: "{{ git_dir.path }}/generalscripts" }
-  - { repo: "{{ git_address.url }}jpartain89/git-automap.git", dest: "{{ git_dir.path }}/git-automap" }
+  - { repo: "{{ git_address.gitlab_ssh }}jpartain89/conffiles.git", dest: "{{ git_dir.path }}/conffiles" }
+  - { repo: "{{ git_address.github_ssh }}jpartain89/generalscripts.git", dest: "{{ git_dir.path }}/generalscripts" }
+  - { repo: "{{ git_address.github_ssh }}jpartain89/git-autopull.git", dest: "{{ git_dir.path }}/git-autopull" }
 
+# Use this variable if you have device-specific git repos for host_vars
 git_device_cloning:
-  - { repo: "{{ git_address.url }}scopatz/nanorc.git", dest: "{{ git_dir.path }}/nanorc" }
+  - { repo: "{{ git_address.github_ssh }}jpartain89/git-autopull.git", dest: "{{ git_dir.path }}/git-autopull" }

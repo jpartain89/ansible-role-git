@@ -11,7 +11,6 @@
 
 - name: Install Git | macOS
   homebrew:
-    install_options: "{{ brew_git_options }}"
     state: present
     name: git
   when: ansible_os_family == "Darwin"
@@ -41,7 +40,7 @@
     recursive: yes
   with_items:
     - "{{ git_cloning }}"
-    - "{{ git_device_cloning }}"
+    - "{{ git_device_cloning | default([]) }}"
   register: _standard_git_cloned
   failed_when: false
   become_user: "{{ ansible_user_id }}"

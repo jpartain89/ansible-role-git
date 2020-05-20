@@ -32,3 +32,7 @@ git_cloning:
 # Use this variable if you have device-specific git repos for host_vars
 git_device_cloning:
   - { repo: "{{ git_address.github_ssh }}jpartain89/git-autopull.git", dest: "{{ git_dir.path }}/git-autopull" }
+
+# This is used as another level of info for you.
+all_group_git_cloning:
+  - []

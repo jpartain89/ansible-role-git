@@ -42,7 +42,7 @@
     - "{{ git_cloning }}"
     - "{{ git_device_cloning | default([]) }}"
     - "{{ group_git_cloning | default ([]) }}"
-    - "{{ all_group_git_cloning }}"
+    - "{{ all_group_git_cloning | default([]) }}"
   register: _standard_git_cloned
   failed_when: false
   become_user: "{{ ansible_user_id }}"

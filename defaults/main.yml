@@ -27,6 +27,9 @@ git_address:
 git_cloning:
   - { repo: "{{ git_address.gitlab_ssh }}jpartain89/conffiles.git", dest: "{{ git_dir.path }}/conffiles" }
   - { repo: "{{ git_address.github_ssh }}jpartain89/generalscripts.git", dest: "{{ git_dir.path }}/generalscripts" }
+
+# This adds an extra layer for your different groupings, if you need it.
+group_git_cloning:
   - { repo: "{{ git_address.github_ssh }}jpartain89/git-autopull.git", dest: "{{ git_dir.path }}/git-autopull" }
 
 # Use this variable if you have device-specific git repos for host_vars

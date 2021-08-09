@@ -26,15 +26,15 @@ git_address:
 # Use this variable for your group_vars
 git_cloning:
   - { repo: "{{ git_address.gitlab_ssh }}jpartain89/conffiles.git", dest: "{{ git_dir.path }}/conffiles" }
-
-# This adds an extra layer for your different groupings, if you need it.
-group_git_cloning:
+  - { repo: "{{ git_address.github_ssh }}jpartain89/generalscripts.git", dest: "{{ git_dir.path }}/generalscripts" }
   - { repo: "{{ git_address.github_ssh }}jpartain89/git-autopull.git", dest: "{{ git_dir.path }}/git-autopull" }
 
 # Use this variable if you have device-specific git repos for host_vars
 git_device_cloning:
   - { repo: "{{ git_address.github_ssh }}jpartain89/git-autopull.git", dest: "{{ git_dir.path }}/git-autopull" }
 
-# Use this for yet another higher level of group variables
+group_git_cloning:
+  - '{ repo: "{{ git_address.gitlab_ssh }}jpartain89/dotfiles.git", dest: "{{ git_dir.path }}/dotfiles" }'
+
 all_group_git_cloning:
-  - { repo: "{{ git_address.github_ssh }}jpartain89/generalscripts.git", dest: "{{ git_dir.path }}/generalscripts" }
+  - []

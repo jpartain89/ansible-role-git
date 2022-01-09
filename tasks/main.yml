@@ -1,20 +1,9 @@
 ---
 
-
-- name: Create local Tmp Files
-  file:
-    state: directory
-    path: "/tmp/git/{{ item }}"
-    mode: 0777
-  loop:
-    - "{{ ansible_facts['nodename'] }}"
-  delegate_to: localhost
-  become: true
-
 - name: Install Git | Linux
   apt:
     name: "{{ git_apt_apps }}"
-    state: present
+    state: latest
     update_cache: true
     cache_valid_time: 86400
   become: true
@@ -29,44 +18,32 @@
 - name: Install Git | Fedora
   dnf:
     name: "{{ git_dnf_apps }}"
-    state: present
+    state: latest
     update_cache: true
   when: ansible_os_family == "RedHat"
-  become: true
+  #become: true
+  failed_when: false
 
 - name: Confirm the Git Directory Exists
   file:
     path: "{{ item.path }}"
     state: directory
-    mode: 0775
   with_items:
     - "{{ git_dir }}"
+  become_user: "{{ ansible_user_id }}"
 
-#- name: Clone git repos
-#  git:
-#    repo: "{{ git_device_cloning.repo }}"
-#    dest: "{{ git_device_cloning.dest }}"
-#    update: true
-#    accept_hostkey: true
-#    recursive: true
-#  failed_when: false
-#  become_user: "{{ ansible_user_id }}"
-
-- name: Create Shell Script to clone git repos
-  template:
-    src: git_clone.j2
-    dest: "/tmp/git/{{ item }}/git_clone.sh"
-    mode: 0775
-  loop:
-    - "{{ ansible_facts['nodename'] }}"
-  delegate_to: localhost
-  register: _create_bash_script
-
-- name: Debug Bash Script
-  debug: var=_create_bash_script
-
-- name: Run Created Bash Script
-  script: /tmp/git/{{ ansible_facts['nodename'] }}/git_clone.sh
-  register: _git_bash_script
-
-- debug: var=_git_bash_script
+- name: Clone git repos
+  git:
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}"
+    update: true
+    accept_hostkey: true
+    recursive: true
+  with_items:
+    - "{{ git_cloning | default([]) }}"
+    - "{{ git_device_cloning | default([]) }}"
+    - "{{ group_git_cloning | default([]) }}"
+    - "{{ all_group_git_cloning | default([]) }}"
+  register: _standard_git_cloned
+  failed_when: false
+  become_user: "{{ ansible_user_id }}"

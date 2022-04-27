@@ -28,6 +28,7 @@
   file:
     path: "{{ item.path }}"
     state: directory
+    mode: 0755
   with_items:
     - "{{ git_dir }}"
   become_user: "{{ ansible_user_id }}"

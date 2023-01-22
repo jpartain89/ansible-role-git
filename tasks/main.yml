@@ -1,7 +1,7 @@
 ---
 
 - name: Install Git | Linux
-  apt:
+  ansible.builtin.apt:
     name: "{{ git_apt_apps }}"
     state: latest
     update_cache: true
@@ -10,22 +10,22 @@
   when: ansible_os_family == "Debian"
 
 - name: Install Git | macOS
-  homebrew:
+  community.general.homebrew:
     state: present
     name: git
   when: ansible_os_family == "Darwin"
 
 - name: Install Git | Fedora
-  dnf:
+  ansible.builtin.dnf:
     name: "{{ git_dnf_apps }}"
     state: latest
     update_cache: true
   when: ansible_os_family == "RedHat"
-  #become: true
+  become: true
   failed_when: false
 
 - name: Confirm the Git Directory Exists
-  file:
+  ansible.builtin.file:
     path: "{{ item.path }}"
     state: directory
     mode: 0755
@@ -34,7 +34,7 @@
   become_user: "{{ ansible_user_id }}"
 
 - name: Clone git repos
-  git:
+  ansible.builtin.git:
     repo: "{{ item.repo }}"
     dest: "{{ item.dest }}"
     update: true

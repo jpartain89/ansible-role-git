@@ -9,13 +9,9 @@ git_dir:
 
 git_apt_apps:
   - git
-  - git-core
-  - git-man
 
 git_dnf_apps:
   - git
-  - git-core
-  - git-all
 
 git_address:
   github_ssh: "git@github.com"

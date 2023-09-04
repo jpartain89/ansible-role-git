@@ -34,9 +34,9 @@
   become_user: "{{ ansible_user_id }}"
 
 - name: Clone git repos
-  git:
+  ansible.builtin.git:
     repo: "{{ item.repo }}"
-    dest: "{{ item.dest }}"
+    dest: "{{ git_path }}/{{ item.repo | basename }}"
     update: true
     accept_hostkey: true
     recursive: true

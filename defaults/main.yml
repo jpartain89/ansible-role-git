@@ -1,11 +1,10 @@
 ---
 # defaults file for ansible-git
 
-git_dir:
-  path: "/home/jpartain89/git"
-  owner: "{{ ansible_user_uid }}"
-  group: "{{ ansible_user_gid }}"
-  mode: '0775'
+git_path: "{{ ansible_env.HOME }}/git"
+git_owner: "{{ ansible_user_uid }}"
+git_group: "{{ ansible_user_gid }}"
+git_mode: '0775'
 
 git_apt_apps:
   - git
@@ -17,18 +16,25 @@ git_dnf_apps:
   - git-core
   - git-all
 
-git_address:
-  github_ssh: "git@github.com"
-  github_url: "https://github.com"
-  gitlab_ssh: "git@gitlab.com"
-  gitlab_url: "https://gitlab.com"
+github_ssh: "git@github.com:"
+github_url: "https://github.com/"
+gitlab_ssh: "git@gitlab.com:"
+gitlab_url: "https://gitlab.com/"
 
 # Use this variable for your group_vars
 git_cloning:
-  - { repo: "{{ git_address.gitlab_ssh }}:jpartain89/conffiles.git", dest: "{{ git_dir.path }}/conffiles" }
-  - { repo: "{{ git_address.github_ssh }}:jpartain89/generalscripts.git", dest: "{{ git_dir.path }}/generalscripts" }
-  - { repo: "{{ git_address.github_ssh }}:jpartain89/git-autopull.git", dest: "{{ git_dir.path }}/git-autopull" }
+  - repo: "{{ gitlab_ssh }}jpartain89/conffiles"
+  - repo: "{{ github_ssh }}jpartain89/generalscripts"
+  - repo: "{{ github_ssh }}jpartain89/git-autopull"
 
 # Use this variable if you have device-specific git repos for host_vars
 git_device_cloning:
-  - { repo: "{{ git_address.github_ssh }}:jpartain89/git-autopull.git", dest: "{{ git_dir.path }}/git-autopull" }
+  - repo: "{{ github_ssh }}jpartain89/git-autopull"
+
+# This is for if you have an "all" group
+all_group_git_cloning:
+  - repo: "{{ gitlab_ssh }}jpartain89/dotfiles"
+  - repo: "{{ github_ssh }}jpartain89/git-autopull"
+  - repo: "{{ github_url }}CISOfy/lynis"
+  - repo: "{{ github_url }}scopatz/nanorc"
+  - repo: "{{ github_ssh }}jpartain89/brewdate"

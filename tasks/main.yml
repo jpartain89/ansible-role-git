@@ -1,7 +1,7 @@
 ---
 
-- name: Install Git | Linux
-  aansible.builtin.apt:
+- name: Install Git | Apt
+  ansible.builtin.apt:
     name: "{{ git_apt_apps }}"
     state: latest
     update_cache: true
@@ -26,11 +26,9 @@
 
 - name: Confirm the Git Directory Exists
   ansible.builtin.file:
-    path: "{{ item.path }}"
+    path: "{{ git_path }}"
     state: directory
     mode: '0755'
-  with_items:
-    - "{{ git_dir }}"
   become_user: "{{ ansible_user_id }}"
 
 - name: Clone git repos

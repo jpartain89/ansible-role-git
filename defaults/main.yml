@@ -8,13 +8,9 @@ git_mode: '0775'
 
 git_apt_apps:
   - git
-  - git-core
-  - git-man
 
 git_dnf_apps:
   - git
-  - git-core
-  - git-all
 
 github_ssh: "git@github.com:"
 github_url: "https://github.com/"

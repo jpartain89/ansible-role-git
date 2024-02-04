@@ -1,7 +1,12 @@
 ---
 
+<<<<<<< HEAD
 - name: Jpartain89.git | main.yml | Intalling git via Apt
   ansible.builin.apt:
+=======
+- name: Install Git | Linux
+  ansible.builtin.apt:
+>>>>>>> 6cca436ad6b0b7d75ad408702dcbe44739e32b9f
     name: "{{ git_apt_apps }}"
     state: latest
     update_cache: true
@@ -9,13 +14,21 @@
   become: true
   when: ansible_os_family == "Debian"
 
+<<<<<<< HEAD
 - name: Jpartain89.git | main.yml | Installing git for macOS
+=======
+- name: Install Git | macOS
+>>>>>>> 6cca436ad6b0b7d75ad408702dcbe44739e32b9f
   community.general.homebrew:
     state: present
     name: git
   when: ansible_os_family == "Darwin"
 
+<<<<<<< HEAD
 - name: Jpartain89.git | main.yml | Install git for Fedora
+=======
+- name: Install Git | Fedora
+>>>>>>> 6cca436ad6b0b7d75ad408702dcbe44739e32b9f
   ansible.builtin.dnf:
     name: "{{ git_dnf_apps }}"
     state: latest
@@ -24,15 +37,25 @@
   become: true
   failed_when: false
 
+<<<<<<< HEAD
 - name: Jpartain89.git | main.yml | Confirm the Git Directory Exists
   ansible.builtin.file:
     path: "{{ ansible_user_dir }}/git"
+=======
+- name: Confirm the Git Directory Exists
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+>>>>>>> 6cca436ad6b0b7d75ad408702dcbe44739e32b9f
     state: directory
     mode: '0755'
   become: true
   become_user: "{{ ansible_user_id }}"
 
+<<<<<<< HEAD
 - name: Jpartain89.git | main.yml | Clone git repos
+=======
+- name: Clone git repos
+>>>>>>> 6cca436ad6b0b7d75ad408702dcbe44739e32b9f
   ansible.builtin.git:
     repo: "{{ item.repo }}"
     dest: "{{ ansible_user_dir }}/{{ item.repo | basename | splitext | first }}"

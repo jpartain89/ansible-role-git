@@ -26,18 +26,16 @@
 
 - name: Jpartain89.git | main.yml | Confirm the Git Directory Exists
   ansible.builtin.file:
-    path: "{{ item.path }}"
+    path: "{{ ansible_user_dir }}/git"
     state: directory
     mode: '0755'
-  with_items:
-    - "{{ git_dir }}"
   become: true
   become_user: "{{ ansible_user_id }}"
 
 - name: Jpartain89.git | main.yml | Clone git repos
   ansible.builtin.git:
     repo: "{{ item.repo }}"
-    dest: "{{ item.dest }}"
+    dest: "{{ ansible_user_dir }}/{{ item.repo | basename | splitext | first }}"
     update: true
     accept_hostkey: true
     recursive: true

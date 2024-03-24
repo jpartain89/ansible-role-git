@@ -1,34 +1,21 @@
 ---
 
-<<<<<<< HEAD
-- name: Jpartain89.git | main.yml | Intalling git via Apt
-  ansible.builin.apt:
-=======
-- name: Install Git | Linux
-  ansible.builtin.apt:
->>>>>>> 6cca436ad6b0b7d75ad408702dcbe44739e32b9f
-    name: "{{ git_apt_apps }}"
-    state: latest
-    update_cache: true
-    cache_valid_time: 86400
-  become: true
-  when: ansible_os_family == "Debian"
+# - name: Jpartain89.git | main.yml | Intalling git via Apt
+#  ansible.builtin.apt:
+#    name: "{{ git_apt_apps }}"
+#    state: latest
+#    update_cache: true
+#    cache_valid_time: 86400
+#  become: true
+#  when: ansible_os_family == "Debian"
 
-<<<<<<< HEAD
 - name: Jpartain89.git | main.yml | Installing git for macOS
-=======
-- name: Install Git | macOS
->>>>>>> 6cca436ad6b0b7d75ad408702dcbe44739e32b9f
   community.general.homebrew:
     state: present
     name: git
   when: ansible_os_family == "Darwin"
 
-<<<<<<< HEAD
 - name: Jpartain89.git | main.yml | Install git for Fedora
-=======
-- name: Install Git | Fedora
->>>>>>> 6cca436ad6b0b7d75ad408702dcbe44739e32b9f
   ansible.builtin.dnf:
     name: "{{ git_dnf_apps }}"
     state: latest
@@ -37,36 +24,62 @@
   become: true
   failed_when: false
 
-<<<<<<< HEAD
 - name: Jpartain89.git | main.yml | Confirm the Git Directory Exists
   ansible.builtin.file:
     path: "{{ ansible_user_dir }}/git"
-=======
-- name: Confirm the Git Directory Exists
-  ansible.builtin.file:
-    path: "{{ item.path }}"
->>>>>>> 6cca436ad6b0b7d75ad408702dcbe44739e32b9f
     state: directory
     mode: '0755'
   become: true
   become_user: "{{ ansible_user_id }}"
 
-<<<<<<< HEAD
-- name: Jpartain89.git | main.yml | Clone git repos
-=======
-- name: Clone git repos
->>>>>>> 6cca436ad6b0b7d75ad408702dcbe44739e32b9f
+- name: Jpartain89.git | main.yml | Clone {{ all_group_git_cloning }}
   ansible.builtin.git:
     repo: "{{ item.repo }}"
-    dest: "{{ ansible_user_dir }}/{{ item.repo | basename | splitext | first }}"
+    dest: "{{ git_path }}/{{ item.repo | basename | splitext | first }}"
+    depth: 1
+    update: true
+    accept_hostkey: true
+    recursive: true
+  with_items:
+    - "{{ all_group_git_cloning | default([]) }}"
+  become: true
+  become_user: "{{ ansible_user_id }}"
+
+- name: Jpartain89.git | main.yml | Clone {{ git_cloning }}
+  ansible.builtin.git:
+    repo: "{{ item.repo }}"
+    dest: "{{ git_path }}/{{ item.repo | basename | splitext | first }}"
+    depth: 1
     update: true
     accept_hostkey: true
     recursive: true
   with_items:
     - "{{ git_cloning | default([]) }}"
+  become: true
+  become_user: "{{ ansible_user_id }}"
+
+- name: Jpartain89.git | main.yml | Clone {{ git_device_cloning }}
+  ansible.builtin.git:
+    repo: "{{ item.repo }}"
+    dest: "{{ git_path }}/{{ item.repo | basename | splitext | first }}"
+    depth: 1
+    update: true
+    accept_hostkey: true
+    recursive: true
+  with_items:
     - "{{ git_device_cloning | default([]) }}"
+  become: true
+  become_user: "{{ ansible_user_id }}"
+
+- name: Jpartain89.git | main.yml | Clone {{ group_git_cloning }}
+  ansible.builtin.git:
+    repo: "{{ item.repo }}"
+    dest: "{{ git_path }}/{{ item.repo | basename | splitext | first }}"
+    depth: 1
+    update: true
+    accept_hostkey: true
+    recursive: true
+  with_items:
     - "{{ group_git_cloning | default([]) }}"
-    - "{{ all_group_git_cloning | default([]) }}"
-  register: _standard_git_cloned
   become: true
   become_user: "{{ ansible_user_id }}"

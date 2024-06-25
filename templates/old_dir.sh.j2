@@ -1,0 +1,16 @@
+#!/bin/bash -e
+
+{% for items in parent_logrotate_files %}
+{% if items.olddir is defined %}
+mkdir -p /var/log/{{ items.olddir }}
+chown {{ items.user }}:{{ items.group }} /var/log/{{ items.olddir }}
+chmod {{ items.mode }} /var/log/{{ items.olddir }}/*
+{% endif %}
+{% endfor %}
+{% for items in logrotate_files %}
+{% if items.olddir is defined %}
+mkdir -p /var/log/{{ items.olddir }}
+chown {{ items.user }}:{{ items.group }} /var/log/{{ items.olddir }}
+chmod {{ items.mode }} /var/log/{{ items.olddir }}/*
+{% endif %}
+{% endfor %}
